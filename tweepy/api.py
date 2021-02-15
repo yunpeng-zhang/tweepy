@@ -1043,66 +1043,68 @@ class API:
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def list_members(self, *args, **kwargs):
+    def list_members(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
         """
         return self.request(
-            'GET', 'lists/members', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'list_id', 'owner_id', 'cursor'
+            'GET', 'lists/members', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'count',
+                'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
     @payload('user')
-    def show_list_member(self, *args, **kwargs):
+    def show_list_member(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members-show
         """
         return self.request(
-            'GET', 'lists/members/show', *args, endpoint_parameters=(
+            'GET', 'lists/members/show', endpoint_parameters=(
                 'list_id', 'slug', 'user_id', 'screen_name',
-                'owner_screen_name', 'owner_id'
+                'owner_screen_name', 'owner_id', 'include_entities',
+                'skip_status'
             ), **kwargs
         )
 
     @payload('list')
-    def subscribe_list(self, *args, **kwargs):
+    def subscribe_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-create
         """
         return self.request(
-            'POST', 'lists/subscribers/create', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            'POST', 'lists/subscribers/create', endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug'
             ), **kwargs
         )
 
     @payload('list')
-    def unsubscribe_list(self, *args, **kwargs):
+    def unsubscribe_list(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/post-lists-subscribers-destroy
         """
         return self.request(
-            'POST', 'lists/subscribers/destroy', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id'
+            'POST', 'lists/subscribers/destroy', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id'
             ), **kwargs
         )
 
     @pagination(mode='cursor')
     @payload('user', list=True)
-    def list_subscribers(self, *args, **kwargs):
+    def list_subscribers(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers
         """
         return self.request(
-            'GET', 'lists/subscribers', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'owner_id', 'list_id', 'cursor',
-                'count', 'include_entities', 'skip_status'
+            'GET', 'lists/subscribers', endpoint_parameters=(
+                'list_id', 'slug', 'owner_screen_name', 'owner_id', 'count',
+                'cursor', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
     @payload('user')
-    def show_list_subscriber(self, *args, **kwargs):
+    def show_list_subscriber(self, **kwargs):
         """ :reference: https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-subscribers-show
         """
         return self.request(
-            'GET', 'lists/subscribers/show', *args, endpoint_parameters=(
-                'owner_screen_name', 'slug', 'screen_name', 'owner_id',
-                'list_id', 'user_id'
+            'GET', 'lists/subscribers/show', endpoint_parameters=(
+                'owner_screen_name', 'owner_id', 'list_id', 'slug', 'user_id',
+                'screen_name', 'include_entities', 'skip_status'
             ), **kwargs
         )
 
